@@ -35,6 +35,25 @@ def add_employee():
         return jsonify({'message': 'Employee added successfully'}), 201
     except Exception as e:
         return jsonify({'error': str(e)}), 400
+
+@app.route('/employees', methods=['GET'])
+def get_employees():
+    try:
+        conn = sqlite3.connect('employees.db')
+        c = conn.cursor()
+        c.execute("SELECT * FROM employees")
+        employees = c.fetchall()
+        conn.close()
+
+        employee_list = []
+        for employee in employees:
+            employee_dict = {'id': employee[0], 'name': employee[1], 'position': employee[2]}
+            employee_list.append(employee_dict)
+
+        return jsonify(employee_list), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
 @app.route('/api/hello')
 def hello():
     return jsonify({'message': 'Hello, World!'})
