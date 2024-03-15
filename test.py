@@ -3,7 +3,14 @@ import sqlite3
 import logging
 
 app = Flask(__name__)
-
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s [%(levelname)s] %(message)s',
+    handlers=[
+        logging.FileHandler('C:/Users/Mobile Programming/sampleFlaskApp/app.log'),
+        logging.StreamHandler()
+    ]
+)
 
 # Function to initialize the database
 def init_db():
@@ -66,5 +73,4 @@ def hello():
 
 
 if __name__ == '__main__':
-    logging.basicConfig(filename='app.log',level=logging.INFO)
     app.run(host='0.0.0.0', port=5000)
