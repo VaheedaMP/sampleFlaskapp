@@ -10,8 +10,11 @@ import sys
 from flask import request
 
 from test import app
+
+
 class FlaskAppService:
     """Silly little application stub"""
+
     def stop(self):
         """Stop the service"""
         self.running = False
@@ -23,6 +26,8 @@ class FlaskAppService:
         while self.running:
             time.sleep(10)  # Important work
             servicemanager.LogInfoMsg("Service running...")
+
+
 class AppServerSvc(win32serviceutil.ServiceFramework):
     _svc_name_ = "FlaskAppService"
     _svc_display_name_ = "Flask App Service"
@@ -44,7 +49,6 @@ class AppServerSvc(win32serviceutil.ServiceFramework):
         self.service_impl = FlaskAppService()
         self.ReportServiceStatus(win32service.SERVICE_RUNNING)
         self.service_impl.run()
-
 
 
 if __name__ == '__main__':

@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import sqlite3
+import logging
 
 app = Flask(__name__)
 
@@ -21,6 +22,7 @@ init_db()
 # Endpoint to add an employee
 @app.route('/add_employee', methods=['POST'])
 def add_employee():
+    logging.info('This is add_employee API')
     try:
         data = request.json
         name = data['name']
@@ -39,6 +41,7 @@ def add_employee():
 
 @app.route('/employees', methods=['GET'])
 def get_employees():
+    logging.info('This is employees API')
     try:
         conn = sqlite3.connect('employees.db')
         c = conn.cursor()
@@ -58,8 +61,10 @@ def get_employees():
 
 @app.route('/api/hello')
 def hello():
+    logging.info('This is hello API')
     return jsonify({'message': 'Hello, World!'})
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5000)
+    logging.basicConfig(filename='app.log',level=logging.INFO)
+    app.run(host='0.0.0.0', port=5000)
