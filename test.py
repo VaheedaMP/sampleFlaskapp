@@ -36,6 +36,7 @@ def add_employee():
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
+
 @app.route('/employees', methods=['GET'])
 def get_employees():
     try:
@@ -53,10 +54,12 @@ def get_employees():
         return jsonify(employee_list), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
+
+
 @app.route('/api/hello')
 def hello():
     return jsonify({'message': 'Hello, World!'})
+
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000)
