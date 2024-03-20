@@ -9,7 +9,7 @@ import sys
 
 from flask import request
 
-from test import app
+from app import app
 
 
 class FlaskAppService:
